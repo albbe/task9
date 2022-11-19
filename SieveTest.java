@@ -1,5 +1,5 @@
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
@@ -67,4 +67,14 @@ public class SieveTest {
         assertFalse(eightIsPrime);
         assertFalse(nineIsPrime);
     }
+
+    @Test (expected=IllegalArgumentException.class)
+    public void isPrimeExceptionWhenNumberIsOne(){
+        sieve.isPrime(1);
+    }
+    @Test(expected=IllegalArgumentException.class)
+    public void isPrimeExceptionWhenNumberIsMinusTen(){
+        sieve.isPrime(10);
+    }
+
 }
