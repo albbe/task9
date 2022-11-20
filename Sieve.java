@@ -10,7 +10,6 @@ import java.util.Arrays;
  */
 public class Sieve {
     boolean[] primeCache;
-
     /**
      * Check that the entered number is one that this calculator can handle
      * @param number An integer value to be checked so that it meets the criteria for this calculator
@@ -32,19 +31,22 @@ public class Sieve {
      * @return an array
      */
     private boolean[] sieve(int number){
-        boolean[] prime = new boolean[number + 1]; // + 1 because of 0-indexing
-        Arrays.fill(prime, true); // Assume all numbers are prime
+        primeCache = new boolean [number + 1]; // + 1 because of 0-indexing En array att spara det försa numret i
+        boolean[] prime = new boolean[number + 1]; // En andra array som används om nummer två är störren nummber ett
+        Arrays.fill(primeCache, true); // Assume all numbers are prime
         int sqrt = (int) Math.floor(Math.sqrt(number));
-        for (int i = 2; i <= sqrt; i++) {
-            if (prime[i]) {
+            for (int i = 2; i <= sqrt; i++) {
+                if (primeCache[i]) {
                 for (int j = i*2; j < prime.length; j += i) {
-                    prime[j] = false; // Mark multiples of i as not prime
+                    primeCache[j] = false; // Mark multiples of i as not prime
                 }
-            }   
+            }
         }
-        return prime;
-    }
-
+            return primeCache;
+        }
+    
+        
+    
     /**
      * Check if a number is prime or not!
      * @param   number  An integer value to be checked for primality.
@@ -52,6 +54,10 @@ public class Sieve {
      */
     public boolean isPrime(int number) {
         exceptionIfIllegalArg(number);
+        if (number >= primeCache.length){
+            boolean[] primeCache = sieve(number);
+            return primeCache[number];
+        }
         boolean[] prime = sieve(number);
         return prime[number];
     }
