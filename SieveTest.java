@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
  * Unit tests for the Sieve class.
  *
  * @author Tobias Hansson
- * @author YOUR NAME HERE
+ * @author Alberto Bergqvist
  */
 public class SieveTest {
     private Sieve sieve;
@@ -72,9 +72,27 @@ public class SieveTest {
     public void isPrimeExceptionWhenNumberIsOne(){
         sieve.isPrime(1);
     }
-    @Test(expected=IllegalArgumentException.class)
+    @Test (expected=IllegalArgumentException.class)
     public void isPrimeExceptionWhenNumberIsMinusTen(){
-        sieve.isPrime(10);
+        sieve.isPrime(-10);
     }
 
+    @Test
+    public void isPrimeFalseWhenNumberIs2Pow26() {
+        int twoPow26 = (int) Math.pow(2, 26);
+    boolean twoPow26IsPrime = sieve.isPrime(twoPow26);
+    assertFalse(twoPow26IsPrime);
+    }
+
+    @Test (expected=IllegalArgumentException.class)
+    public void isPrimeExceptionWhenNumberIs2Pow26Plus1(){
+        int twoPow26Plus1 = (int) Math.pow(2, (26 + 1));
+        sieve.isPrime(twoPow26Plus1);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void isPrimeExceptionWhenNumberIs2Pow28(){
+        int twoPow28 = (int) Math.pow(2, 28);
+        sieve.isPrime(twoPow28);
+    }
 }
