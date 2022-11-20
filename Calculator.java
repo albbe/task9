@@ -67,13 +67,14 @@ public class Calculator {
 
     /**
      * Inverse the currently stored value by the given number
-     * @param reciprocal the number to inverse by
+     * @param reciprocal the number to inverse
      * @return the current stored value after the inversion
      */
-    public double inverse(double reciprocal) {
+    public double inverse(double reciprocal){
         if (reciprocal == 0){
-        throw new IllegalArgumentException("Argument 'inverter' is 0");}
-        value = 1 / reciprocal;
-        return value;
+            throw new IllegalArgumentException("Argument 'inverter' is 0");}
+            value = Math.pow(reciprocal, -1);
+            return value;
+        }
     }
-}
+

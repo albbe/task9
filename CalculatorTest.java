@@ -1,6 +1,5 @@
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 /**
@@ -124,23 +123,29 @@ public class CalculatorTest {
         calculator.divide(0);
     }
 
-   @Test
-   public void multiplicativeInverseGivesCorrectResultsForPositiveValues(){
-    double expected = 0;
-    for (int i = 1; 1 <10; i++) {
-        i /= expected;
-        assertEquals(expected, calculator.inverse(i), ALLOWED_ERROR);
-    }
-   }
-
+    /**
+     * Test 
+     */
    @Test
     public void multiplicativeInverseGivesCorrectResultsForNegativeValues(){
         double expected = 0;
-        for (int i = -1; i > -10; i--) {
-        i /= expected;
-        assertEquals(expected, calculator.inverse(i), ALLOWED_ERROR);
-        }
+    for (int i = 1; i <= 10; i++) {
+        int imput = i * -1;
+        expected = Math.pow(imput, -1);
+        double result = calculator.inverse(imput);
+        assertEquals(expected, result, ALLOWED_ERROR);
     }
+   }
+
+    @Test
+    public void multiplicativeInverseGivesCorrectResultsForPositiveValues(){
+    double expected = 0;
+    for (int i = 1; i < 10; i++) {
+        expected = Math.pow(i, -1);
+        double result = calculator.inverse(i);
+        assertEquals(expected, result, ALLOWED_ERROR);
+    }
+   }
 
     @Test (expected=IllegalArgumentException.class)
     public void multiplicativeInverseGivesIllegalArgumentExceptionWhenInvertedByZero(){
@@ -149,16 +154,13 @@ public class CalculatorTest {
 
     @Test
     public void multiplicativeInverseGivesCorrectResultsIfAppliedTwice(){
-        double expected = 0;
-        for (int i = 1; i > 10; i ++){
-            i /= expected;
-            for (int k = 1; k > 10; k ++){
-                k /= expected;
-            }
-            assertEquals(expected, calculator.inverse(i), ALLOWED_ERROR);
+        for (int i = 1; i < 10; i ++){
+            double res1 = calculator.inverse(i);
+            double res2 = calculator.inverse(res1);
+            assertEquals(i, res2, ALLOWED_ERROR);    
         }
-
+    }
     }
 
-   }
+
 
